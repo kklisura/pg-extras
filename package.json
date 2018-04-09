@@ -1,0 +1,59 @@
+{
+  "name": "pg-extras",
+  "version": "0.0.1",
+  "author": "Kenan Klisura @kklisura",
+  "bin": {
+    "pg-extras": "./bin/run"
+  },
+  "bugs": "https://github.com/kklisura/pg-extras/issues",
+  "dependencies": {
+    "@oclif/command": "1",
+    "@oclif/config": "1",
+    "@oclif/plugin-help": "1"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "1",
+    "@oclif/test": "1",
+    "@oclif/tslint": "1",
+    "@types/chai": "4",
+    "@types/mocha": "5",
+    "@types/node": "9",
+    "chai": "4",
+    "globby": "8",
+    "mocha": "5",
+    "ts-node": "5",
+    "tslib": "1",
+    "tslint": "5",
+    "typescript": "2.8"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    ".oclif.manifest.json",
+    "/bin",
+    "/lib"
+  ],
+  "homepage": "https://github.com/kklisura/pg-extras",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "oclif": {
+    "commands": "./lib/commands",
+    "bin": "pg-extras",
+    "plugins": [
+      "@oclif/plugin-help"
+    ]
+  },
+  "repository": "kklisura/pg-extras",
+  "scripts": {
+    "postpack": "rm -f .oclif.manifest.json",
+    "posttest": "tsc -p test --noEmit && tslint -p test -t stylish",
+    "prepack": "rm -rf lib && tsc && oclif-dev manifest && oclif-dev readme",
+    "test": "mocha --forbid-only \"test/**/*.test.ts\"",
+    "version": "oclif-dev readme && git add README.md"
+  },
+  "types": "lib/index.d.ts"
+}
