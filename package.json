@@ -9,7 +9,17 @@
   "dependencies": {
     "@oclif/command": "1",
     "@oclif/config": "1",
-    "@oclif/plugin-help": "1"
+    "@oclif/plugin-help": "1",
+    "@types/moment-duration-format": "^2.2.0",
+    "@types/pg": "^7.4.5",
+    "ascii-table": "^0.0.9",
+    "moment": "^2.22.0",
+    "moment-duration-format": "^2.2.2",
+    "pg": "^7.4.1",
+    "pg-format": "^1.0.4",
+    "postgres-interval": "^1.1.1",
+    "strip-newlines": "^1.0.1",
+    "username": "^3.0.0"
   },
   "devDependencies": {
     "@oclif/dev-cli": "1",
