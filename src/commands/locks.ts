@@ -16,7 +16,8 @@ const SUPPORTED_LOCKS_MODE = [
   'ShareLock',
   'ShareRowExclusiveLock',
   'ExclusiveLock',
-  'AccessExclusiveLock'
+  'AccessExclusiveLock',
+  'all'
 ]
 
 export default class LocksCommand extends BaseCommand {
@@ -45,6 +46,8 @@ export default class LocksCommand extends BaseCommand {
   }
 
   getQuery(_: any, flags: any): QueryConfig {
+    let values: any[] = []
+
     let truncatedQueryString = (prefix: string): string => {
       let column = `${prefix}query`
       if (flags.truncate) {
@@ -52,6 +55,12 @@ export default class LocksCommand extends BaseCommand {
       } else {
         return column
       }
+    }
+
+    let whereLocksMode = ''
+    if (isAll(flags.locks)) {
+      whereLocksMode = 'AND pg_locks.mode = $1'
+      values.push(flags.lock)
     }
 
     let query = `
@@ -67,10 +76,14 @@ export default class LocksCommand extends BaseCommand {
         ON (pg_locks.relation = pg_class.oid)
       WHERE pg_stat_activity.query <> '<insufficient privilege>'
         AND pg_locks.pid = pg_stat_activity.pid
-        AND pg_locks.mode = $1
+        ${whereLocksMode}
         AND pg_stat_activity.pid <> pg_backend_pid() order by query_start;
     `
 
-    return {text: query, values: [flags.lock]}
+    return {text: query, values}
   }
+}
+
+function isAll(type: string): boolean {
+  return type === 'all'
 }
