@@ -1,16 +1,96 @@
-import BaseCommand from '../base-command'
-import {defaultExample, defaultUsage, fileName} from '../utils/command'
+import {flags} from '@oclif/command'
+import {QueryConfig} from 'pg'
+
+import BaseCommand, {DEFAULT_CONNECTION_FLAGS} from '../base-command'
+import {defaultUsage, fileName} from '../utils/command'
+import {toInt} from '../utils/data'
 
 const COMMAND_NAME = fileName(__filename)
+
+const DEFAULT_LIMIT = 10
+const DEFAULT_BLOAT_TYPE = 'both'
+
+const SUPPORTED_BLOAT_TYPES = ['index', 'table', 'both']
 
 export default class BloatCommand extends BaseCommand {
   static description = 'Show table and index bloat in your database ordered by most wasteful.'
 
-  static examples = [defaultExample(COMMAND_NAME)]
+  static examples = [
+    `${COMMAND_NAME} --type index --limit 20 --schema myschema`,
+    `${COMMAND_NAME} --type table --schema myschema`,
+    `${COMMAND_NAME} --schema myschema`,
+    `${COMMAND_NAME}`
+  ]
   static usage = [defaultUsage(COMMAND_NAME)]
 
-  getQuery() {
-    return `
+  static flags = {
+    ...DEFAULT_CONNECTION_FLAGS,
+    type: flags.enum({
+      char: 't',
+      description: `bloat type, one of (${SUPPORTED_BLOAT_TYPES.join('|')})`,
+      helpValue: 'TYPE',
+      default: DEFAULT_BLOAT_TYPE,
+      options: SUPPORTED_BLOAT_TYPES
+    }),
+    limit: flags.string({
+      char: 'l',
+      description: 'limit number of output items',
+      helpValue: 'LIMIT',
+      default: String(DEFAULT_LIMIT)
+    }),
+    schema: flags.string({
+      char: 's',
+      description: 'schema',
+      helpValue: 'SCHEMA'
+    })
+  }
+
+  getClass(): typeof BaseCommand {
+    return BloatCommand
+  }
+
+  getQuery(_: any, flags: any): QueryConfig {
+    const values: any[] = []
+    const valuesIndex = () => '$' + (values.length + 1)
+
+    let bloat = ''
+
+    let whereSchema = ''
+
+    if (flags.schema) {
+      whereSchema = `WHERE schemaname = ${valuesIndex()}`
+      values.push(flags.schema)
+    }
+
+    if (isTableBloat(flags.type)) {
+      bloat += `
+        SELECT
+          'table' as type,
+          schemaname,
+          tablename as object_name,
+          ROUND(CASE WHEN otta=0 THEN 0.0 ELSE table_bloat.relpages/otta::numeric END,1) AS bloat,
+          CASE WHEN relpages < otta THEN '0' ELSE (bs*(table_bloat.relpages-otta)::bigint)::bigint END AS raw_waste
+        FROM
+          table_bloat`
+    }
+
+    if (isIndexBloat(flags.type)) {
+      if (bloat) {
+        bloat += ' UNION '
+      }
+
+      bloat += `
+        SELECT
+          'index' as type,
+          schemaname,
+          tablename || '::' || iname as object_name,
+          ROUND(CASE WHEN iotta=0 OR ipages=0 THEN 0.0 ELSE ipages/iotta::numeric END,1) AS bloat,
+          CASE WHEN ipages < iotta THEN '0' ELSE (bs*(ipages-iotta))::bigint END AS raw_waste
+        FROM
+          index_bloat`
+    }
+
+    const query = `
       WITH constants AS (
         SELECT current_setting('block_size')::numeric AS bs, 23 AS hdr, 4 AS ma
       ), bloat_info AS (
@@ -37,7 +117,7 @@ export default class BloatCommand extends BaseCommand {
           CEIL((cc.reltuples*((datahdr+ma-
             (CASE WHEN datahdr%ma=0 THEN ma ELSE datahdr%ma END))+nullhdr2+4))/(bs-20::float)) AS otta
         FROM bloat_info
-        JOIN pg_class cc ON cc.relname = bloat_info.tablename
+        JOIN pg_class cc ON cc.relname = bloat_info.tablename AND cc.reltype <> 0
         JOIN pg_namespace nn ON cc.relnamespace = nn.oid AND nn.nspname = bloat_info.schemaname AND nn.nspname <> 'information_schema'
       ), index_bloat AS (
         SELECT
@@ -51,26 +131,23 @@ export default class BloatCommand extends BaseCommand {
         JOIN pg_class c2 ON c2.oid = i.indexrelid
       )
       SELECT
-        type, schemaname, object_name, bloat, pg_size_pretty(raw_waste) as waste
+        type, schemaname AS schema, object_name, bloat, pg_size_pretty(raw_waste) as waste
       FROM
-      (SELECT
-        'table' as type,
-        schemaname,
-        tablename as object_name,
-        ROUND(CASE WHEN otta=0 THEN 0.0 ELSE table_bloat.relpages/otta::numeric END,1) AS bloat,
-        CASE WHEN relpages < otta THEN '0' ELSE (bs*(table_bloat.relpages-otta)::bigint)::bigint END AS raw_waste
-      FROM
-        table_bloat
-          UNION
-      SELECT
-        'index' as type,
-        schemaname,
-        tablename || '::' || iname as object_name,
-        ROUND(CASE WHEN iotta=0 OR ipages=0 THEN 0.0 ELSE ipages/iotta::numeric END,1) AS bloat,
-        CASE WHEN ipages < iotta THEN '0' ELSE (bs*(ipages-iotta))::bigint END AS raw_waste
-      FROM
-        index_bloat) bloat_summary
+      (${bloat}) bloat_summary
+      ${whereSchema}
       ORDER BY raw_waste DESC, bloat DESC
-      LIMIT 10`
+      LIMIT ${valuesIndex()}`
+
+    values.push(toInt(flags.limit))
+
+    return {text: query, values}
   }
+}
+
+function isTableBloat(type: string): boolean {
+  return type === 'table' || type === 'both'
+}
+
+function isIndexBloat(type: string): boolean {
+  return type === 'index' || type === 'both'
 }

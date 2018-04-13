@@ -38,13 +38,13 @@ export const DEFAULT_CONNECTION_FLAGS: any = {
   }),
   dbname: flags.string({
     char: 'd',
-    description: 'database name to connec to',
+    description: 'database name',
     helpValue: 'DBNAME',
     default: DEFAULT_DBNAME
   }),
   username: flags.string({
     char: 'U',
-    description: 'database user name',
+    description: 'user name',
     helpValue: 'USERNAME',
     default: DEFAULT_USERNAME
   })
@@ -71,6 +71,9 @@ export interface Table {
  * Base command for all other commands.
  */
 export default abstract class BaseCommand extends Command {
+  /**
+   * Override getClass method when adding new flags.
+   */
   static flags = {
     ...DEFAULT_CONNECTION_FLAGS
   }
@@ -118,10 +121,17 @@ export default abstract class BaseCommand extends Command {
     await this.beforeRun(args, flags)
 
     const queryResult = await this.pgQuery(this.client, this.getQuery(args, flags))
+    this.logResults(queryResult, args, flags)
+  }
 
-    const table = this.queryResultToTable(queryResult)
-
-    this.log(table.toString())
+  /**
+   * Logs the result.
+   *
+   * @param queryResult Query result.
+   */
+  // tslint:disable-next-line:no-unused
+  async logResults(queryResult: QueryResult, args: any, flags: any) {
+    this.log(this.queryResultToTable(queryResult).toString())
   }
 
   /**

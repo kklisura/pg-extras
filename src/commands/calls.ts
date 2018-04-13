@@ -14,8 +14,8 @@ const DEFAULT_SCHEMA = 'public'
 
 const PG_STAT_STATEMENTS = 'pg_stat_statements'
 
-export default class OutliersCommand extends BaseCommand {
-  static description = 'Show queries that have longest execution time in aggregate.'
+export default class CallsCommand extends BaseCommand {
+  static description = 'Show most frequently called queries.'
 
   static examples = [`${COMMAND_NAME} my-schema -U my-name -t`]
   static usage = [`${COMMAND_NAME} [SCHEMA] [OPTIONS]`]
@@ -48,7 +48,7 @@ export default class OutliersCommand extends BaseCommand {
   ]
 
   getClass() {
-    return OutliersCommand
+    return CallsCommand
   }
 
   async logResults(_: QueryResult, args: any, flags: any) {
@@ -73,11 +73,11 @@ export default class OutliersCommand extends BaseCommand {
     const query = `
       SELECT interval '1 millisecond' * total_time AS total_exec_time,
              to_char((total_time/sum(total_time) OVER()) * 100, 'FM90D0') || '%'  AS prop_exec_time,
-             to_char(calls, 'FM999G999G999G990') AS ncalls,
+             to_char(calls, 'FM999G999G990') AS ncalls,
              interval '1 millisecond' * (blk_read_time + blk_write_time) AS sync_io_time,
              ${truncatedQueryString} AS query
       FROM pg_stat_statements WHERE userid = (SELECT usesysid FROM pg_user WHERE usename = current_user LIMIT 1)
-      ORDER BY total_time DESC
+      ORDER BY calls DESC
       LIMIT $1;`
 
     return {text: query, values: [limit]}

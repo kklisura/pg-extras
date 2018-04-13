@@ -28,15 +28,17 @@ USAGE
 * [pg-extras bloat [OPTIONS]](#pg-extras-bloat-options)
 * [pg-extras blocking [OPTIONS]](#pg-extras-blocking-options)
 * [pg-extras cache-hit [OPTIONS]](#pg-extras-cache-hit-options)
+* [pg-extras calls [SCHEMA] [OPTIONS]](#pg-extras-calls-schema-options)
 * [pg-extras extensions [OPTIONS]](#pg-extras-extensions-options)
 * [pg-extras help [COMMAND]](#pg-extras-help-command)
 * [pg-extras index-size [OPTIONS]](#pg-extras-index-size-options)
 * [pg-extras index-usage [OPTIONS]](#pg-extras-index-usage-options)
-* [pg-extras locks [SCHEMA] [OPTIONS]](#pg-extras-locks-schema-options)
+* [pg-extras locks [OPTIONS]](#pg-extras-locks-options)
 * [pg-extras long-running-queries [OPTIONS]](#pg-extras-long-running-queries-options)
 * [pg-extras outliers [SCHEMA] [OPTIONS]](#pg-extras-outliers-schema-options)
 * [pg-extras records-rank [OPTIONS]](#pg-extras-records-rank-options)
 * [pg-extras seq-scans [OPTIONS]](#pg-extras-seq-scans-options)
+* [pg-extras stats-reset [OPTIONS]](#pg-extras-stats-reset-options)
 * [pg-extras table-indexes-size [OPTIONS]](#pg-extras-table-indexes-size-options)
 * [pg-extras table-size [OPTIONS]](#pg-extras-table-size-options)
 * [pg-extras total-index-size [OPTIONS]](#pg-extras-total-index-size-options)
@@ -54,13 +56,22 @@ USAGE
   $ pg-extras bloat [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] database user name
-  -d, --dbname=DBNAME      [default: postgres] database name to connec to
+  -U, --username=USERNAME  [default: user] user name
+  -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
+  -l, --limit=LIMIT        [default: 10] limit number of output items
   -p, --port=PORT          [default: 5432] database server host
+  -s, --schema=SCHEMA      schema
+  -t, --type=TYPE          [default: both] bloat type, one of (index|table|both)
 
-EXAMPLE
-  $ pg-extras bloat [OPTIONS]
+EXAMPLES
+  bloat --type index --limit 20 --schema myschema
+
+  bloat --type table --schema myschema
+
+  bloat --schema myschema
+
+  bloat
 ```
 
 _See code: [src/commands/bloat.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/bloat.ts)_
@@ -74,8 +85,8 @@ USAGE
   $ pg-extras blocking [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] database user name
-  -d, --dbname=DBNAME      [default: postgres] database name to connec to
+  -U, --username=USERNAME  [default: user] user name
+  -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
@@ -94,8 +105,8 @@ USAGE
   $ pg-extras cache-hit [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] database user name
-  -d, --dbname=DBNAME      [default: postgres] database name to connec to
+  -U, --username=USERNAME  [default: user] user name
+  -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
@@ -104,6 +115,32 @@ EXAMPLE
 ```
 
 _See code: [src/commands/cache-hit.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/cache-hit.ts)_
+
+## pg-extras calls [SCHEMA] [OPTIONS]
+
+Show most frequently called queries.
+
+```
+USAGE
+  $ pg-extras calls [SCHEMA] [OPTIONS]
+
+ARGUMENTS
+  SCHEMA  [default: public] schema name
+
+OPTIONS
+  -R, --reset              resets the statistics gathered by pg_stat_statements
+  -U, --username=USERNAME  [default: user] user name
+  -d, --dbname=DBNAME      [default: postgres] database name
+  -h, --host=HOST          [default: localhost] database server host
+  -l, --limit=LIMIT        [default: 10] limit number of output queries
+  -p, --port=PORT          [default: 5432] database server host
+  -t, --truncate           truncate query
+
+EXAMPLE
+  calls my-schema -U my-name -t
+```
+
+_See code: [src/commands/calls.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/calls.ts)_
 
 ## pg-extras extensions [OPTIONS]
 
@@ -114,8 +151,8 @@ USAGE
   $ pg-extras extensions [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] database user name
-  -d, --dbname=DBNAME      [default: postgres] database name to connec to
+  -U, --username=USERNAME  [default: user] user name
+  -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
@@ -151,8 +188,8 @@ USAGE
   $ pg-extras index-size [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] database user name
-  -d, --dbname=DBNAME      [default: postgres] database name to connec to
+  -U, --username=USERNAME  [default: user] user name
+  -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
@@ -171,8 +208,8 @@ USAGE
   $ pg-extras index-usage [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] database user name
-  -d, --dbname=DBNAME      [default: postgres] database name to connec to
+  -U, --username=USERNAME  [default: user] user name
+  -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
@@ -182,23 +219,25 @@ EXAMPLE
 
 _See code: [src/commands/index-usage.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/index-usage.ts)_
 
-## pg-extras locks [SCHEMA] [OPTIONS]
+## pg-extras locks [OPTIONS]
 
-Number of connections per credential.
+Display queries with active locks.
 
 ```
 USAGE
-  $ pg-extras locks [SCHEMA] [OPTIONS]
-
-ARGUMENTS
-  SCHEMA  [default: public] schema name
+  $ pg-extras locks [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] database user name
-  -d, --dbname=DBNAME      [default: postgres] database name to connec to
+  -U, --username=USERNAME  [default: user] user name
+  -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
-  -l, --limit=LIMIT        [default: 10] limit number of output queries
+
+  -l, --lock=LOCK          [default: ExclusiveLock] lock mode, one of
+                           (AccessShareLock|RowShareLock|RowExclusiveLock|ShareUpdateExclusiveLock|ShareLock|ShareRowExc
+                           lusiveLock|ExclusiveLock|AccessExclusiveLock)
+
   -p, --port=PORT          [default: 5432] database server host
+
   -t, --truncate           truncate query
 
 EXAMPLE
@@ -216,8 +255,8 @@ USAGE
   $ pg-extras long-running-queries [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] database user name
-  -d, --dbname=DBNAME      [default: postgres] database name to connec to
+  -U, --username=USERNAME  [default: user] user name
+  -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
@@ -229,7 +268,7 @@ _See code: [src/commands/long-running-queries.ts](https://github.com/kklisura/pg
 
 ## pg-extras outliers [SCHEMA] [OPTIONS]
 
-Number of connections per credential.
+Show queries that have longest execution time in aggregate.
 
 ```
 USAGE
@@ -239,15 +278,16 @@ ARGUMENTS
   SCHEMA  [default: public] schema name
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] database user name
-  -d, --dbname=DBNAME      [default: postgres] database name to connec to
+  -R, --reset              resets the statistics gathered by pg_stat_statements
+  -U, --username=USERNAME  [default: user] user name
+  -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -l, --limit=LIMIT        [default: 10] limit number of output queries
   -p, --port=PORT          [default: 5432] database server host
   -t, --truncate           truncate query
 
 EXAMPLE
-  $ pg-extras outliers [OPTIONS]
+  outliers my-schema -U my-name -t
 ```
 
 _See code: [src/commands/outliers.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/outliers.ts)_
@@ -261,8 +301,8 @@ USAGE
   $ pg-extras records-rank [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] database user name
-  -d, --dbname=DBNAME      [default: postgres] database name to connec to
+  -U, --username=USERNAME  [default: user] user name
+  -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
@@ -281,8 +321,8 @@ USAGE
   $ pg-extras seq-scans [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] database user name
-  -d, --dbname=DBNAME      [default: postgres] database name to connec to
+  -U, --username=USERNAME  [default: user] user name
+  -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
@@ -291,6 +331,26 @@ EXAMPLE
 ```
 
 _See code: [src/commands/seq-scans.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/seq-scans.ts)_
+
+## pg-extras stats-reset [OPTIONS]
+
+Reset all statistics counters for the current database to zero (requires superuser privileges).
+
+```
+USAGE
+  $ pg-extras stats-reset [OPTIONS]
+
+OPTIONS
+  -U, --username=USERNAME  [default: user] user name
+  -d, --dbname=DBNAME      [default: postgres] database name
+  -h, --host=HOST          [default: localhost] database server host
+  -p, --port=PORT          [default: 5432] database server host
+
+EXAMPLE
+  $ pg-extras stats-reset [OPTIONS]
+```
+
+_See code: [src/commands/stats-reset.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/stats-reset.ts)_
 
 ## pg-extras table-indexes-size [OPTIONS]
 
@@ -301,8 +361,8 @@ USAGE
   $ pg-extras table-indexes-size [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] database user name
-  -d, --dbname=DBNAME      [default: postgres] database name to connec to
+  -U, --username=USERNAME  [default: user] user name
+  -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
@@ -321,8 +381,8 @@ USAGE
   $ pg-extras table-size [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] database user name
-  -d, --dbname=DBNAME      [default: postgres] database name to connec to
+  -U, --username=USERNAME  [default: user] user name
+  -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
@@ -341,8 +401,8 @@ USAGE
   $ pg-extras total-index-size [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] database user name
-  -d, --dbname=DBNAME      [default: postgres] database name to connec to
+  -U, --username=USERNAME  [default: user] user name
+  -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
@@ -361,8 +421,8 @@ USAGE
   $ pg-extras total-table-size [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] database user name
-  -d, --dbname=DBNAME      [default: postgres] database name to connec to
+  -U, --username=USERNAME  [default: user] user name
+  -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
@@ -381,8 +441,8 @@ USAGE
   $ pg-extras unused-indexes [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] database user name
-  -d, --dbname=DBNAME      [default: postgres] database name to connec to
+  -U, --username=USERNAME  [default: user] user name
+  -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
@@ -401,8 +461,8 @@ USAGE
   $ pg-extras user-connections [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] database user name
-  -d, --dbname=DBNAME      [default: postgres] database name to connec to
+  -U, --username=USERNAME  [default: user] user name
+  -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
@@ -421,8 +481,8 @@ USAGE
   $ pg-extras vaccum-stats [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] database user name
-  -d, --dbname=DBNAME      [default: postgres] database name to connec to
+  -U, --username=USERNAME  [default: user] user name
+  -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
