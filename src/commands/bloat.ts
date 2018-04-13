@@ -4,6 +4,7 @@ import {QueryConfig} from 'pg'
 import BaseCommand, {DEFAULT_CONNECTION_FLAGS} from '../base-command'
 import {defaultUsage, fileName} from '../utils/command'
 import {toInt} from '../utils/data'
+import {BLOAT_EXAMPLE} from '../utils/examples'
 
 const COMMAND_NAME = fileName(__filename)
 
@@ -19,7 +20,7 @@ export default class BloatCommand extends BaseCommand {
     `${COMMAND_NAME} --type index --limit 20 --schema myschema`,
     `${COMMAND_NAME} --type table --schema myschema`,
     `${COMMAND_NAME} --schema myschema`,
-    `${COMMAND_NAME}`
+    BLOAT_EXAMPLE
   ]
   static usage = [defaultUsage(COMMAND_NAME)]
 

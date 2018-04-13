@@ -5,6 +5,7 @@ import BaseCommand, {DEFAULT_CONNECTION_FLAGS} from '../base-command'
 
 import {fileName} from '../utils/command'
 import {toInt} from '../utils/data'
+import {CALLS_EXAMPLE} from '../utils/examples'
 import {assertExtensionPresent, QueryResult, setActiveSchema} from '../utils/postgres'
 
 const COMMAND_NAME = fileName(__filename)
@@ -17,7 +18,7 @@ const PG_STAT_STATEMENTS = 'pg_stat_statements'
 export default class CallsCommand extends BaseCommand {
   static description = 'Show most frequently called queries.'
 
-  static examples = [`${COMMAND_NAME} my-schema -U my-name -t`]
+  static examples = [`${COMMAND_NAME} my-schema -U my-name -t`, CALLS_EXAMPLE]
   static usage = [`${COMMAND_NAME} [SCHEMA] [OPTIONS]`]
 
   static flags = {

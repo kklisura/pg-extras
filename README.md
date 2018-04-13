@@ -6,9 +6,40 @@ pg-extras
 [![License](https://img.shields.io/npm/l/pg-extras.svg)](https://github.com/kklisura/pg-extras/blob/master/package.json)
 
 <!-- toc -->
+* [About](#about)
+* [Environment variables](#environment-variables)
 * [Usage](#usage)
 * [Commands](#commands)
 <!-- tocstop -->
+
+# About
+
+`pg-extras` is a command line tool that shows various statistics of postgres db. It's a port of [heroku-pg-extras](https://github.com/heroku/heroku-pg-extras) that can be applied on any postgres database besides heroku's.
+
+# Environment variables
+
+`pg-extras` support some of the same environment variables as `psql` supports.  The most common are:
+
+```
+PGDATABASE=my_db
+PGUSER=username
+PGPASSWORD="my awesome password"
+PGPORT=5432
+PGSSLMODE=require
+```
+
+## Authentication
+
+In order to authenticate a user, use:
+```
+PGPASSWORD=pass1234 pg-extras ...
+```
+or export it
+```
+export PGPASSWORD=pass1234
+pg-extras ...
+```
+
 # Usage
 <!-- usage -->
 ```sh-session
@@ -71,7 +102,13 @@ EXAMPLES
 
   bloat --schema myschema
 
-  bloat
+  .-------------------------------------------------------.
+  | type  |  schema  |   object_name    | bloat |  waste  |
+  |-------|----------|------------------|-------|---------|
+  | table | myschema | users            | 9.9   | 354 MB  |
+  | index | myschema | users::users_idx | 4.9   | 122 MB  |
+  | table | myschema | blogs            | 1.9   | 22 MB   |
+  '----------------------------------- -------------------'
 ```
 
 _See code: [src/commands/bloat.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/bloat.ts)_
@@ -91,7 +128,7 @@ OPTIONS
   -p, --port=PORT          [default: 5432] database server host
 
 EXAMPLE
-  $ pg-extras blocking [OPTIONS]
+  blocking [OPTIONS]
 ```
 
 _See code: [src/commands/blocking.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/blocking.ts)_
@@ -110,8 +147,15 @@ OPTIONS
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
-EXAMPLE
-  $ pg-extras cache-hit [OPTIONS]
+EXAMPLES
+  cache-hit [OPTIONS]
+
+  .------------------------.
+  |      name      | ratio |
+  |----------------|-------|
+  | index hit rate | 1.0   |
+  | table hit rate | 0.999 |
+  '------------------------'
 ```
 
 _See code: [src/commands/cache-hit.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/cache-hit.ts)_
@@ -136,8 +180,16 @@ OPTIONS
   -p, --port=PORT          [default: 5432] database server host
   -t, --truncate           truncate query
 
-EXAMPLE
+EXAMPLES
   calls my-schema -U my-name -t
+
+  .-------------------------------------------------------------------------------------------.
+  | total_exec_time | prop_exec_time | ncalls | sync_io_time |             query              |
+  |-----------------|----------------|--------|--------------|--------------------------------|
+  |      007 millis | 0.3%           | 295    |   000 millis | SELECT CASE WHEN typbasetype=? |
+  |      008 millis | 0.4%           | 295    |   000 millis | SELECT format_type(oid,?) as t.|
+  |      005 millis | 0.3%           | 194    |   000 millis | SELECT attname FROM pg_attribut|
+  '-------------------------------------------------------------------------------------------'
 ```
 
 _See code: [src/commands/calls.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/calls.ts)_
@@ -156,8 +208,15 @@ OPTIONS
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
-EXAMPLE
-  $ pg-extras extensions [OPTIONS]
+EXAMPLES
+  extensions [OPTIONS]
+
+  .-----------------------------------------------------------------------------------------------------.
+  |        name        | default_version | installed_version |                 comment                  |
+  |--------------------|-----------------|-------------------|------------------------------------------|
+  | pgcrypto           | 1.3             |                   | cryptographic functions                  |
+  | pg_stat_statements | 1.4             | 1.4               | track execution statistics of all SQL..  |
+  '-----------------------------------------------------------------------------------------------------'
 ```
 
 _See code: [src/commands/extensions.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/extensions.ts)_
@@ -193,8 +252,16 @@ OPTIONS
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
-EXAMPLE
-  $ pg-extras index-size [OPTIONS]
+EXAMPLES
+  index-size [OPTIONS]
+
+  .----------------------------------------------.
+  |              name               |    size    |
+  |---------------------------------|------------|
+  | users_idx                       | 153 MB     |
+  | blog_post_user_manager_type_idx | 39 MB      |
+  | person_legacy_id_idx            | 33 MB      |
+  '----------------------------------------------'
 ```
 
 _See code: [src/commands/index-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/index-size.ts)_
@@ -214,7 +281,7 @@ OPTIONS
   -p, --port=PORT          [default: 5432] database server host
 
 EXAMPLE
-  $ pg-extras index-usage [OPTIONS]
+  index-usage [OPTIONS]
 ```
 
 _See code: [src/commands/index-usage.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/index-usage.ts)_
@@ -234,14 +301,14 @@ OPTIONS
 
   -l, --lock=LOCK          [default: ExclusiveLock] lock mode, one of
                            (AccessShareLock|RowShareLock|RowExclusiveLock|ShareUpdateExclusiveLock|ShareLock|ShareRowExc
-                           lusiveLock|ExclusiveLock|AccessExclusiveLock)
+                           lusiveLock|ExclusiveLock|AccessExclusiveLock|all)
 
   -p, --port=PORT          [default: 5432] database server host
 
   -t, --truncate           truncate query
 
 EXAMPLE
-  $ pg-extras locks [OPTIONS]
+  locks [OPTIONS]
 ```
 
 _See code: [src/commands/locks.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/locks.ts)_
@@ -261,7 +328,7 @@ OPTIONS
   -p, --port=PORT          [default: 5432] database server host
 
 EXAMPLE
-  $ pg-extras long-running-queries [OPTIONS]
+  long-running-queries [OPTIONS]
 ```
 
 _See code: [src/commands/long-running-queries.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/long-running-queries.ts)_
@@ -307,7 +374,7 @@ OPTIONS
   -p, --port=PORT          [default: 5432] database server host
 
 EXAMPLE
-  $ pg-extras records-rank [OPTIONS]
+  records-rank [OPTIONS]
 ```
 
 _See code: [src/commands/records-rank.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/records-rank.ts)_
@@ -327,7 +394,7 @@ OPTIONS
   -p, --port=PORT          [default: 5432] database server host
 
 EXAMPLE
-  $ pg-extras seq-scans [OPTIONS]
+  seq-scans [OPTIONS]
 ```
 
 _See code: [src/commands/seq-scans.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/seq-scans.ts)_
@@ -347,7 +414,7 @@ OPTIONS
   -p, --port=PORT          [default: 5432] database server host
 
 EXAMPLE
-  $ pg-extras stats-reset [OPTIONS]
+  stats-reset [OPTIONS]
 ```
 
 _See code: [src/commands/stats-reset.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/stats-reset.ts)_
@@ -367,7 +434,7 @@ OPTIONS
   -p, --port=PORT          [default: 5432] database server host
 
 EXAMPLE
-  $ pg-extras table-indexes-size [OPTIONS]
+  table-indexes-size [OPTIONS]
 ```
 
 _See code: [src/commands/table-indexes-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/table-indexes-size.ts)_
@@ -387,7 +454,7 @@ OPTIONS
   -p, --port=PORT          [default: 5432] database server host
 
 EXAMPLE
-  $ pg-extras table-size [OPTIONS]
+  table-size [OPTIONS]
 ```
 
 _See code: [src/commands/table-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/table-size.ts)_
@@ -407,7 +474,7 @@ OPTIONS
   -p, --port=PORT          [default: 5432] database server host
 
 EXAMPLE
-  $ pg-extras total-index-size [OPTIONS]
+  total-index-size [OPTIONS]
 ```
 
 _See code: [src/commands/total-index-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/total-index-size.ts)_
@@ -427,7 +494,7 @@ OPTIONS
   -p, --port=PORT          [default: 5432] database server host
 
 EXAMPLE
-  $ pg-extras total-table-size [OPTIONS]
+  total-table-size [OPTIONS]
 ```
 
 _See code: [src/commands/total-table-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/total-table-size.ts)_
@@ -445,9 +512,10 @@ OPTIONS
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
+  -s, --schema=SCHEMA      schema
 
 EXAMPLE
-  $ pg-extras unused-indexes [OPTIONS]
+  unused-indexes [OPTIONS]
 ```
 
 _See code: [src/commands/unused-indexes.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/unused-indexes.ts)_
@@ -467,7 +535,7 @@ OPTIONS
   -p, --port=PORT          [default: 5432] database server host
 
 EXAMPLE
-  $ pg-extras user-connections [OPTIONS]
+  user-connections [OPTIONS]
 ```
 
 _See code: [src/commands/user-connections.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/user-connections.ts)_
@@ -487,7 +555,7 @@ OPTIONS
   -p, --port=PORT          [default: 5432] database server host
 
 EXAMPLE
-  $ pg-extras vaccum-stats [OPTIONS]
+  vaccum-stats [OPTIONS]
 ```
 
 _See code: [src/commands/vaccum-stats.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/vaccum-stats.ts)_

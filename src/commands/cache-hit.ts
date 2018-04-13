@@ -1,12 +1,13 @@
 import BaseCommand from '../base-command'
 import {defaultExample, defaultUsage, fileName} from '../utils/command'
+import {CACHE_HIT_EXAMPLE} from '../utils/examples'
 
 const COMMAND_NAME = fileName(__filename)
 
 export default class CacheHitCommand extends BaseCommand {
   static description = 'Show index and table hit rate.'
 
-  static examples = [defaultExample(COMMAND_NAME)]
+  static examples = [defaultExample(COMMAND_NAME), CACHE_HIT_EXAMPLE]
   static usage = [defaultUsage(COMMAND_NAME)]
 
   getQuery() {
