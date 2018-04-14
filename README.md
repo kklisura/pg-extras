@@ -107,8 +107,7 @@ EXAMPLES
   |-------|----------|------------------|-------|---------|
   | table | myschema | users            | 9.9   | 354 MB  |
   | index | myschema | users::users_idx | 4.9   | 122 MB  |
-  | table | myschema | blogs            | 1.9   | 22 MB   |
-  '----------------------------------- -------------------'
+  '-------------------------------------------------------'
 ```
 
 _See code: [src/commands/bloat.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/bloat.ts)_
@@ -183,13 +182,12 @@ OPTIONS
 EXAMPLES
   calls my-schema -U my-name -t
 
-  .-------------------------------------------------------------------------------------------.
-  | total_exec_time | prop_exec_time | ncalls | sync_io_time |             query              |
-  |-----------------|----------------|--------|--------------|--------------------------------|
-  |      007 millis | 0.3%           | 295    |   000 millis | SELECT CASE WHEN typbasetype=? |
-  |      008 millis | 0.4%           | 295    |   000 millis | SELECT format_type(oid,?) as t.|
-  |      005 millis | 0.3%           | 194    |   000 millis | SELECT attname FROM pg_attribut|
-  '-------------------------------------------------------------------------------------------'
+  .-----------------------------------------------------------------------.
+  | total_exec_time | prop_exec_time | ncalls | sync_io_time |   query    |
+  |-----------------|----------------|--------|--------------|------------|
+  |      007 millis | 0.3%           | 295    |   000 millis | Query 1... |
+  |      008 millis | 0.4%           | 29     |   000 millis | Query 2... |
+  '-----------------------------------------------------------------------'
 ```
 
 _See code: [src/commands/calls.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/calls.ts)_
@@ -211,12 +209,12 @@ OPTIONS
 EXAMPLES
   extensions [OPTIONS]
 
-  .-----------------------------------------------------------------------------------------------------.
-  |        name        | default_version | installed_version |                 comment                  |
-  |--------------------|-----------------|-------------------|------------------------------------------|
-  | pgcrypto           | 1.3             |                   | cryptographic functions                  |
-  | pg_stat_statements | 1.4             | 1.4               | track execution statistics of all SQL..  |
-  '-----------------------------------------------------------------------------------------------------'
+  .-------------------------------------------------------------------------------------.
+  |        name        | default_version | installed_version |         comment          |
+  |--------------------|-----------------|-------------------|--------------------------|
+  | pgcrypto           | 1.3             |                   | cryptographic functions  |
+  | pg_stat_statements | 1.4             | 1.4               | track execution stati... |
+  '-------------------------------------------------------------------------------------'
 ```
 
 _See code: [src/commands/extensions.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/extensions.ts)_
@@ -260,7 +258,6 @@ EXAMPLES
   |---------------------------------|------------|
   | users_idx                       | 153 MB     |
   | blog_post_user_manager_type_idx | 39 MB      |
-  | person_legacy_id_idx            | 33 MB      |
   '----------------------------------------------'
 ```
 
@@ -280,8 +277,15 @@ OPTIONS
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
-EXAMPLE
+EXAMPLES
   index-usage [OPTIONS]
+
+  .---------------------------------------------------------------------------.
+  |  schema  |       name       | percent_of_times_index_used | rows_in_table |
+  |----------|------------------|-----------------------------|---------------|
+  | myschema | users            | 95                          | 0             |
+  | myschema | blogs            | 100                         | 0             |
+  '---------------------------------------------------------------------------'
 ```
 
 _See code: [src/commands/index-usage.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/index-usage.ts)_
@@ -353,8 +357,15 @@ OPTIONS
   -p, --port=PORT          [default: 5432] database server host
   -t, --truncate           truncate query
 
-EXAMPLE
+EXAMPLES
   outliers my-schema -U my-name -t
+
+  .-----------------------------------------------------------------------.
+  | total_exec_time | prop_exec_time | ncalls | sync_io_time |   query    |
+  |-----------------|----------------|--------|--------------|------------|
+  |      300 millis | 10.7%          | 335    |   000 millis | Query 1... |
+  |      212 millis | 7.5%           | 1      |   000 millis | Query 2... |
+  '-----------------------------------------------------------------------'
 ```
 
 _See code: [src/commands/outliers.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/outliers.ts)_
@@ -373,8 +384,15 @@ OPTIONS
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
-EXAMPLE
+EXAMPLES
   records-rank [OPTIONS]
+
+  .------------------------------------------------.
+  |             name             | estimated_count |
+  |------------------------------|-----------------|
+  | blogs                        | 134             |
+  | users                        | 1               |
+  '------------------------------------------------'
 ```
 
 _See code: [src/commands/records-rank.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/records-rank.ts)_
@@ -393,8 +411,15 @@ OPTIONS
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
-EXAMPLE
+EXAMPLES
   seq-scans [OPTIONS]
+
+  .--------------------------------------.
+  |             name             | count |
+  |------------------------------|-------|
+  | users                        | 21    |
+  | blogs                        | 0     |
+  '--------------------------------------'
 ```
 
 _See code: [src/commands/seq-scans.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/seq-scans.ts)_
@@ -433,8 +458,15 @@ OPTIONS
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
-EXAMPLE
+EXAMPLES
   table-indexes-size [OPTIONS]
+
+  .-------------------------------------------.
+  |            table             | index_size |
+  |------------------------------|------------|
+  | blogs                        | 201 MB     |
+  | users                        | 45 MB      |
+  '------------------------------'------------'
 ```
 
 _See code: [src/commands/table-indexes-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/table-indexes-size.ts)_
@@ -453,8 +485,15 @@ OPTIONS
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
-EXAMPLE
+EXAMPLES
   table-size [OPTIONS]
+
+  .-------------------------------------------.
+  |             name             |    size    |
+  |------------------------------|------------|
+  | blogs                        | 394 MB     |
+  | users                        | 111 MB     |
+  '------------------------------'------------'
 ```
 
 _See code: [src/commands/table-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/table-size.ts)_
@@ -473,8 +512,14 @@ OPTIONS
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
-EXAMPLE
+EXAMPLES
   total-index-size [OPTIONS]
+
+  .--------.
+  |  size  |
+  |--------|
+  | 352 MB |
+  '--------'
 ```
 
 _See code: [src/commands/total-index-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/total-index-size.ts)_
@@ -493,8 +538,15 @@ OPTIONS
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
-EXAMPLE
+EXAMPLES
   total-table-size [OPTIONS]
+
+  .-------------------------------------------.
+  |             name             |    size    |
+  |------------------------------|------------|
+  | discussions                  | 595 MB     |
+  | users                        | 8192 bytes |
+  '-------------------------------------------'
 ```
 
 _See code: [src/commands/total-table-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/total-table-size.ts)_
@@ -514,8 +566,15 @@ OPTIONS
   -p, --port=PORT          [default: 5432] database server host
   -s, --schema=SCHEMA      schema
 
-EXAMPLE
+EXAMPLES
   unused-indexes [OPTIONS]
+
+  .------------------------------------------------------------------------------------------------------------------.
+  |       reason       | schema | tablename | indexname | index_scan_pct | scans_per_write | index_size | table_size |
+  |--------------------|--------|-----------|-----------|----------------|-----------------|------------|------------|
+  | Never Used Indexes | test   | users     | user_idx  | 0.00           | 0.00            | 46 MB      | 111 MB     |
+  | Never Used Indexes | test   | blogs     | blogs_idx | 0.00           | 0.00            | 16 kB      | 8192 bytes |
+  '------------------------------------------------------------------------------------------------------------------'
 ```
 
 _See code: [src/commands/unused-indexes.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/unused-indexes.ts)_
@@ -534,8 +593,14 @@ OPTIONS
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
 
-EXAMPLE
+EXAMPLES
   user-connections [OPTIONS]
+
+  .----------------------------.
+  | usename | connection_count |
+  |---------|------------------|
+  | my-user | 4                |
+  '----------------------------'
 ```
 
 _See code: [src/commands/user-connections.ts](https://github.com/kklisura/pg-extras/blob/v0.0.1/src/commands/user-connections.ts)_

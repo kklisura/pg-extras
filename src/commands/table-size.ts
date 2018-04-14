@@ -1,12 +1,13 @@
 import BaseCommand from '../base-command'
 import {defaultExample, defaultUsage, fileName} from '../utils/command'
+import {TABLE_SIZE} from '../utils/examples'
 
 const COMMAND_NAME = fileName(__filename)
 
 export default class TableSizeCommand extends BaseCommand {
   static description = 'Show the size of the tables (excluding indexes), descending by size.'
 
-  static examples = [defaultExample(COMMAND_NAME)]
+  static examples = [defaultExample(COMMAND_NAME), TABLE_SIZE]
   static usage = [defaultUsage(COMMAND_NAME)]
 
   getQuery() {

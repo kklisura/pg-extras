@@ -5,6 +5,7 @@ import BaseCommand, {DEFAULT_CONNECTION_FLAGS} from '../base-command'
 
 import {fileName} from '../utils/command'
 import {toInt} from '../utils/data'
+import {OUTLIERS} from '../utils/examples'
 import {assertExtensionPresent, QueryResult, setActiveSchema} from '../utils/postgres'
 
 const COMMAND_NAME = fileName(__filename)
@@ -17,7 +18,7 @@ const PG_STAT_STATEMENTS = 'pg_stat_statements'
 export default class OutliersCommand extends BaseCommand {
   static description = 'Show queries that have longest execution time in aggregate.'
 
-  static examples = [`${COMMAND_NAME} my-schema -U my-name -t`]
+  static examples = [`${COMMAND_NAME} my-schema -U my-name -t`, OUTLIERS]
   static usage = [`${COMMAND_NAME} [SCHEMA] [OPTIONS]`]
 
   static flags = {

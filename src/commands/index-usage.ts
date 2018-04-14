@@ -1,12 +1,13 @@
 import BaseCommand from '../base-command'
 import {defaultExample, defaultUsage, fileName} from '../utils/command'
+import {INDEX_USAGE} from '../utils/examples'
 
 const COMMAND_NAME = fileName(__filename)
 
 export default class IndexUsageCommand extends BaseCommand {
   static description = 'Calculates your index hit rate (effective databases are at 99% and up).'
 
-  static examples = [defaultExample(COMMAND_NAME)]
+  static examples = [defaultExample(COMMAND_NAME), INDEX_USAGE]
   static usage = [defaultUsage(COMMAND_NAME)]
 
   getQuery() {

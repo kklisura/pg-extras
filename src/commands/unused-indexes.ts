@@ -3,6 +3,7 @@ import {QueryConfig} from 'pg'
 
 import BaseCommand, {DEFAULT_CONNECTION_FLAGS} from '../base-command'
 import {defaultExample, defaultUsage, fileName} from '../utils/command'
+import {UNUSED_INDEXES} from '../utils/examples'
 
 const COMMAND_NAME = fileName(__filename)
 
@@ -11,7 +12,7 @@ export default class UnusedIndexesCommand extends BaseCommand {
 
   static help = 'Lists unused indexes.'
 
-  static examples = [defaultExample(COMMAND_NAME)]
+  static examples = [defaultExample(COMMAND_NAME), UNUSED_INDEXES]
   static usage = [defaultUsage(COMMAND_NAME)]
 
   static flags = {
