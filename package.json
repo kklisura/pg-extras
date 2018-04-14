@@ -1,6 +1,7 @@
 {
   "name": "pg-extras",
   "version": "0.0.1",
+  "description": "CLI tool for various postgres statistics.",
   "author": "Kenan Klisura @kklisura",
   "bin": {
     "pg-extras": "./bin/run"
