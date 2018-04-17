@@ -87,7 +87,7 @@ USAGE
   $ pg-extras bloat [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] user name
+  -U, --username=USERNAME  [default: user] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -l, --limit=LIMIT        [default: 10] limit number of output items
@@ -121,7 +121,7 @@ USAGE
   $ pg-extras blocking [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] user name
+  -U, --username=USERNAME  [default: user] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -141,7 +141,7 @@ USAGE
   $ pg-extras cache-hit [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] user name
+  -U, --username=USERNAME  [default: user] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -172,7 +172,7 @@ ARGUMENTS
 
 OPTIONS
   -R, --reset              resets the statistics gathered by pg_stat_statements
-  -U, --username=USERNAME  [default: kenanklisura] user name
+  -U, --username=USERNAME  [default: user] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -l, --limit=LIMIT        [default: 10] limit number of output queries
@@ -201,7 +201,7 @@ USAGE
   $ pg-extras extensions [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] user name
+  -U, --username=USERNAME  [default: user] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -245,7 +245,7 @@ USAGE
   $ pg-extras index-size [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] user name
+  -U, --username=USERNAME  [default: user] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -272,7 +272,7 @@ USAGE
   $ pg-extras index-usage [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] user name
+  -U, --username=USERNAME  [default: user] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -299,7 +299,7 @@ USAGE
   $ pg-extras locks [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] user name
+  -U, --username=USERNAME  [default: user] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
 
@@ -326,7 +326,7 @@ USAGE
   $ pg-extras long-running-queries [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] user name
+  -U, --username=USERNAME  [default: user] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -350,7 +350,7 @@ ARGUMENTS
 
 OPTIONS
   -R, --reset              resets the statistics gathered by pg_stat_statements
-  -U, --username=USERNAME  [default: kenanklisura] user name
+  -U, --username=USERNAME  [default: user] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -l, --limit=LIMIT        [default: 10] limit number of output queries
@@ -379,7 +379,7 @@ USAGE
   $ pg-extras records-rank [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] user name
+  -U, --username=USERNAME  [default: user] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -406,7 +406,7 @@ USAGE
   $ pg-extras seq-scans [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] user name
+  -U, --username=USERNAME  [default: user] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -433,7 +433,7 @@ USAGE
   $ pg-extras stats-reset [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] user name
+  -U, --username=USERNAME  [default: user] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -453,7 +453,7 @@ USAGE
   $ pg-extras table-indexes-size [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] user name
+  -U, --username=USERNAME  [default: user] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -480,7 +480,7 @@ USAGE
   $ pg-extras table-size [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] user name
+  -U, --username=USERNAME  [default: user] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -507,7 +507,7 @@ USAGE
   $ pg-extras total-index-size [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] user name
+  -U, --username=USERNAME  [default: user] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -533,7 +533,7 @@ USAGE
   $ pg-extras total-table-size [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] user name
+  -U, --username=USERNAME  [default: user] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -560,7 +560,7 @@ USAGE
   $ pg-extras unused-indexes [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] user name
+  -U, --username=USERNAME  [default: user] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -588,7 +588,7 @@ USAGE
   $ pg-extras user-connections [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] user name
+  -U, --username=USERNAME  [default: user] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -614,7 +614,7 @@ USAGE
   $ pg-extras vaccum-stats [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: kenanklisura] user name
+  -U, --username=USERNAME  [default: user] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
