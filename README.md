@@ -47,7 +47,7 @@ $ npm install -g pg-extras
 $ pg-extras COMMAND
 running command...
 $ pg-extras (-v|--version|version)
-pg-extras/0.0.2 darwin-x64 node-v9.9.0
+pg-extras/0.0.3 darwin-x64 node-v9.9.0
 $ pg-extras --help [COMMAND]
 USAGE
   $ pg-extras COMMAND
@@ -87,7 +87,7 @@ USAGE
   $ pg-extras bloat [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: user] user name
+  -U, --username=USERNAME  [default: kenanklisura] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -l, --limit=LIMIT        [default: 10] limit number of output items
@@ -110,7 +110,7 @@ EXAMPLES
   '-------------------------------------------------------'
 ```
 
-_See code: [src/commands/bloat.ts](https://github.com/kklisura/pg-extras/blob/v0.0.2/src/commands/bloat.ts)_
+_See code: [src/commands/bloat.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/bloat.ts)_
 
 ## pg-extras blocking [OPTIONS]
 
@@ -121,7 +121,7 @@ USAGE
   $ pg-extras blocking [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: user] user name
+  -U, --username=USERNAME  [default: kenanklisura] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -130,7 +130,7 @@ EXAMPLE
   blocking [OPTIONS]
 ```
 
-_See code: [src/commands/blocking.ts](https://github.com/kklisura/pg-extras/blob/v0.0.2/src/commands/blocking.ts)_
+_See code: [src/commands/blocking.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/blocking.ts)_
 
 ## pg-extras cache-hit [OPTIONS]
 
@@ -141,7 +141,7 @@ USAGE
   $ pg-extras cache-hit [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: user] user name
+  -U, --username=USERNAME  [default: kenanklisura] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -157,7 +157,7 @@ EXAMPLES
   '------------------------'
 ```
 
-_See code: [src/commands/cache-hit.ts](https://github.com/kklisura/pg-extras/blob/v0.0.2/src/commands/cache-hit.ts)_
+_See code: [src/commands/cache-hit.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/cache-hit.ts)_
 
 ## pg-extras calls [SCHEMA] [OPTIONS]
 
@@ -172,7 +172,7 @@ ARGUMENTS
 
 OPTIONS
   -R, --reset              resets the statistics gathered by pg_stat_statements
-  -U, --username=USERNAME  [default: user] user name
+  -U, --username=USERNAME  [default: kenanklisura] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -l, --limit=LIMIT        [default: 10] limit number of output queries
@@ -190,7 +190,7 @@ EXAMPLES
   '-----------------------------------------------------------------------'
 ```
 
-_See code: [src/commands/calls.ts](https://github.com/kklisura/pg-extras/blob/v0.0.2/src/commands/calls.ts)_
+_See code: [src/commands/calls.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/calls.ts)_
 
 ## pg-extras extensions [OPTIONS]
 
@@ -201,7 +201,7 @@ USAGE
   $ pg-extras extensions [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: user] user name
+  -U, --username=USERNAME  [default: kenanklisura] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -217,7 +217,7 @@ EXAMPLES
   '-------------------------------------------------------------------------------------'
 ```
 
-_See code: [src/commands/extensions.ts](https://github.com/kklisura/pg-extras/blob/v0.0.2/src/commands/extensions.ts)_
+_See code: [src/commands/extensions.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/extensions.ts)_
 
 ## pg-extras help [COMMAND]
 
@@ -245,7 +245,7 @@ USAGE
   $ pg-extras index-size [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: user] user name
+  -U, --username=USERNAME  [default: kenanklisura] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -261,7 +261,7 @@ EXAMPLES
   '----------------------------------------------'
 ```
 
-_See code: [src/commands/index-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.2/src/commands/index-size.ts)_
+_See code: [src/commands/index-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/index-size.ts)_
 
 ## pg-extras index-usage [OPTIONS]
 
@@ -272,7 +272,7 @@ USAGE
   $ pg-extras index-usage [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: user] user name
+  -U, --username=USERNAME  [default: kenanklisura] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -288,7 +288,7 @@ EXAMPLES
   '---------------------------------------------------------------------------'
 ```
 
-_See code: [src/commands/index-usage.ts](https://github.com/kklisura/pg-extras/blob/v0.0.2/src/commands/index-usage.ts)_
+_See code: [src/commands/index-usage.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/index-usage.ts)_
 
 ## pg-extras locks [OPTIONS]
 
@@ -299,7 +299,7 @@ USAGE
   $ pg-extras locks [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: user] user name
+  -U, --username=USERNAME  [default: kenanklisura] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
 
@@ -315,7 +315,7 @@ EXAMPLE
   locks [OPTIONS]
 ```
 
-_See code: [src/commands/locks.ts](https://github.com/kklisura/pg-extras/blob/v0.0.2/src/commands/locks.ts)_
+_See code: [src/commands/locks.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/locks.ts)_
 
 ## pg-extras long-running-queries [OPTIONS]
 
@@ -326,7 +326,7 @@ USAGE
   $ pg-extras long-running-queries [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: user] user name
+  -U, --username=USERNAME  [default: kenanklisura] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -335,7 +335,7 @@ EXAMPLE
   long-running-queries [OPTIONS]
 ```
 
-_See code: [src/commands/long-running-queries.ts](https://github.com/kklisura/pg-extras/blob/v0.0.2/src/commands/long-running-queries.ts)_
+_See code: [src/commands/long-running-queries.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/long-running-queries.ts)_
 
 ## pg-extras outliers [SCHEMA] [OPTIONS]
 
@@ -350,7 +350,7 @@ ARGUMENTS
 
 OPTIONS
   -R, --reset              resets the statistics gathered by pg_stat_statements
-  -U, --username=USERNAME  [default: user] user name
+  -U, --username=USERNAME  [default: kenanklisura] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -l, --limit=LIMIT        [default: 10] limit number of output queries
@@ -368,7 +368,7 @@ EXAMPLES
   '-----------------------------------------------------------------------'
 ```
 
-_See code: [src/commands/outliers.ts](https://github.com/kklisura/pg-extras/blob/v0.0.2/src/commands/outliers.ts)_
+_See code: [src/commands/outliers.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/outliers.ts)_
 
 ## pg-extras records-rank [OPTIONS]
 
@@ -379,7 +379,7 @@ USAGE
   $ pg-extras records-rank [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: user] user name
+  -U, --username=USERNAME  [default: kenanklisura] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -395,7 +395,7 @@ EXAMPLES
   '------------------------------------------------'
 ```
 
-_See code: [src/commands/records-rank.ts](https://github.com/kklisura/pg-extras/blob/v0.0.2/src/commands/records-rank.ts)_
+_See code: [src/commands/records-rank.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/records-rank.ts)_
 
 ## pg-extras seq-scans [OPTIONS]
 
@@ -406,7 +406,7 @@ USAGE
   $ pg-extras seq-scans [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: user] user name
+  -U, --username=USERNAME  [default: kenanklisura] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -422,7 +422,7 @@ EXAMPLES
   '--------------------------------------'
 ```
 
-_See code: [src/commands/seq-scans.ts](https://github.com/kklisura/pg-extras/blob/v0.0.2/src/commands/seq-scans.ts)_
+_See code: [src/commands/seq-scans.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/seq-scans.ts)_
 
 ## pg-extras stats-reset [OPTIONS]
 
@@ -433,7 +433,7 @@ USAGE
   $ pg-extras stats-reset [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: user] user name
+  -U, --username=USERNAME  [default: kenanklisura] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -442,7 +442,7 @@ EXAMPLE
   stats-reset [OPTIONS]
 ```
 
-_See code: [src/commands/stats-reset.ts](https://github.com/kklisura/pg-extras/blob/v0.0.2/src/commands/stats-reset.ts)_
+_See code: [src/commands/stats-reset.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/stats-reset.ts)_
 
 ## pg-extras table-indexes-size [OPTIONS]
 
@@ -453,7 +453,7 @@ USAGE
   $ pg-extras table-indexes-size [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: user] user name
+  -U, --username=USERNAME  [default: kenanklisura] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -469,7 +469,7 @@ EXAMPLES
   '------------------------------'------------'
 ```
 
-_See code: [src/commands/table-indexes-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.2/src/commands/table-indexes-size.ts)_
+_See code: [src/commands/table-indexes-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/table-indexes-size.ts)_
 
 ## pg-extras table-size [OPTIONS]
 
@@ -480,7 +480,7 @@ USAGE
   $ pg-extras table-size [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: user] user name
+  -U, --username=USERNAME  [default: kenanklisura] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -496,7 +496,7 @@ EXAMPLES
   '------------------------------'------------'
 ```
 
-_See code: [src/commands/table-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.2/src/commands/table-size.ts)_
+_See code: [src/commands/table-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/table-size.ts)_
 
 ## pg-extras total-index-size [OPTIONS]
 
@@ -507,7 +507,7 @@ USAGE
   $ pg-extras total-index-size [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: user] user name
+  -U, --username=USERNAME  [default: kenanklisura] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -522,7 +522,7 @@ EXAMPLES
   '--------'
 ```
 
-_See code: [src/commands/total-index-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.2/src/commands/total-index-size.ts)_
+_See code: [src/commands/total-index-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/total-index-size.ts)_
 
 ## pg-extras total-table-size [OPTIONS]
 
@@ -533,7 +533,7 @@ USAGE
   $ pg-extras total-table-size [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: user] user name
+  -U, --username=USERNAME  [default: kenanklisura] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -549,7 +549,7 @@ EXAMPLES
   '-------------------------------------------'
 ```
 
-_See code: [src/commands/total-table-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.2/src/commands/total-table-size.ts)_
+_See code: [src/commands/total-table-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/total-table-size.ts)_
 
 ## pg-extras unused-indexes [OPTIONS]
 
@@ -560,7 +560,7 @@ USAGE
   $ pg-extras unused-indexes [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: user] user name
+  -U, --username=USERNAME  [default: kenanklisura] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -577,7 +577,7 @@ EXAMPLES
   '------------------------------------------------------------------------------------------------------------------'
 ```
 
-_See code: [src/commands/unused-indexes.ts](https://github.com/kklisura/pg-extras/blob/v0.0.2/src/commands/unused-indexes.ts)_
+_See code: [src/commands/unused-indexes.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/unused-indexes.ts)_
 
 ## pg-extras user-connections [OPTIONS]
 
@@ -588,7 +588,7 @@ USAGE
   $ pg-extras user-connections [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: user] user name
+  -U, --username=USERNAME  [default: kenanklisura] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -603,7 +603,7 @@ EXAMPLES
   '----------------------------'
 ```
 
-_See code: [src/commands/user-connections.ts](https://github.com/kklisura/pg-extras/blob/v0.0.2/src/commands/user-connections.ts)_
+_See code: [src/commands/user-connections.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/user-connections.ts)_
 
 ## pg-extras vaccum-stats [OPTIONS]
 
@@ -614,7 +614,7 @@ USAGE
   $ pg-extras vaccum-stats [OPTIONS]
 
 OPTIONS
-  -U, --username=USERNAME  [default: user] user name
+  -U, --username=USERNAME  [default: kenanklisura] user name
   -d, --dbname=DBNAME      [default: postgres] database name
   -h, --host=HOST          [default: localhost] database server host
   -p, --port=PORT          [default: 5432] database server host
@@ -623,5 +623,5 @@ EXAMPLE
   vaccum-stats [OPTIONS]
 ```
 
-_See code: [src/commands/vaccum-stats.ts](https://github.com/kklisura/pg-extras/blob/v0.0.2/src/commands/vaccum-stats.ts)_
+_See code: [src/commands/vaccum-stats.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/vaccum-stats.ts)_
 <!-- commandsstop -->
