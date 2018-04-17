@@ -5,7 +5,7 @@ import * as momentDurationFormatSetup from 'moment-duration-format'
 import {QueryConfig} from 'pg'
 import * as PostgresInterval from 'postgres-interval'
 
-import {stripNewLines} from './utils/data'
+import {stripNewLines,isString} from './utils/data'
 import {
   Client,
   connect,
@@ -206,8 +206,11 @@ export default abstract class BaseCommand extends Command {
           intervalTypesIndices[index] = true
           return moment.duration(value.toISO()).format('hh [hrs], mm [min], ss [secs], SSS [millis]')
         }
+        if (isString(value)) {
+          return stripNewLines(value).trim()
+        }
 
-        return stripNewLines(value).trim()
+        return value
       })
     })
 

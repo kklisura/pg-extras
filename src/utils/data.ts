@@ -22,3 +22,12 @@ export function toInt(value: string): number {
 export function stripNewLines(value: string): string {
   return value.replace(/[\r\n]/g, '')
 }
+
+/**
+ * Returns true if given value is string.
+ *
+ * @param value Value
+ */
+export function isString(value: any): boolean {
+  return value && typeof(value) === 'string'
+}
