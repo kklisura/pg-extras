@@ -5,7 +5,7 @@ import * as momentDurationFormatSetup from 'moment-duration-format'
 import {QueryConfig} from 'pg'
 import * as PostgresInterval from 'postgres-interval'
 
-import {stripNewLines,isString} from './utils/data'
+import {isString, stripNewLines} from './utils/data'
 import {
   Client,
   connect,

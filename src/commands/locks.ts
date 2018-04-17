@@ -58,7 +58,7 @@ export default class LocksCommand extends BaseCommand {
     }
 
     let whereLocksMode = ''
-    if (isAll(flags.locks)) {
+    if (!isAll(flags.locks)) {
       whereLocksMode = 'AND pg_locks.mode = $1'
       values.push(flags.lock)
     }
@@ -68,6 +68,7 @@ export default class LocksCommand extends BaseCommand {
         pg_stat_activity.pid,
         pg_class.relname,
         pg_locks.transactionid,
+        pg_locks.mode,
         pg_locks.granted,
         ${truncatedQueryString('pg_stat_activity.')} AS query_snippet,
         age(now(),pg_stat_activity.query_start) AS "age"
