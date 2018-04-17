@@ -47,7 +47,7 @@ $ npm install -g pg-extras
 $ pg-extras COMMAND
 running command...
 $ pg-extras (-v|--version|version)
-pg-extras/0.0.3 darwin-x64 node-v9.9.0
+pg-extras/0.0.4 darwin-x64 node-v9.9.0
 $ pg-extras --help [COMMAND]
 USAGE
   $ pg-extras COMMAND
@@ -110,7 +110,7 @@ EXAMPLES
   '-------------------------------------------------------'
 ```
 
-_See code: [src/commands/bloat.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/bloat.ts)_
+_See code: [src/commands/bloat.ts](https://github.com/kklisura/pg-extras/blob/v0.0.4/src/commands/bloat.ts)_
 
 ## pg-extras blocking [OPTIONS]
 
@@ -130,7 +130,7 @@ EXAMPLE
   blocking [OPTIONS]
 ```
 
-_See code: [src/commands/blocking.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/blocking.ts)_
+_See code: [src/commands/blocking.ts](https://github.com/kklisura/pg-extras/blob/v0.0.4/src/commands/blocking.ts)_
 
 ## pg-extras cache-hit [OPTIONS]
 
@@ -157,7 +157,7 @@ EXAMPLES
   '------------------------'
 ```
 
-_See code: [src/commands/cache-hit.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/cache-hit.ts)_
+_See code: [src/commands/cache-hit.ts](https://github.com/kklisura/pg-extras/blob/v0.0.4/src/commands/cache-hit.ts)_
 
 ## pg-extras calls [SCHEMA] [OPTIONS]
 
@@ -190,7 +190,7 @@ EXAMPLES
   '-----------------------------------------------------------------------'
 ```
 
-_See code: [src/commands/calls.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/calls.ts)_
+_See code: [src/commands/calls.ts](https://github.com/kklisura/pg-extras/blob/v0.0.4/src/commands/calls.ts)_
 
 ## pg-extras extensions [OPTIONS]
 
@@ -217,7 +217,7 @@ EXAMPLES
   '-------------------------------------------------------------------------------------'
 ```
 
-_See code: [src/commands/extensions.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/extensions.ts)_
+_See code: [src/commands/extensions.ts](https://github.com/kklisura/pg-extras/blob/v0.0.4/src/commands/extensions.ts)_
 
 ## pg-extras help [COMMAND]
 
@@ -261,7 +261,7 @@ EXAMPLES
   '----------------------------------------------'
 ```
 
-_See code: [src/commands/index-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/index-size.ts)_
+_See code: [src/commands/index-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.4/src/commands/index-size.ts)_
 
 ## pg-extras index-usage [OPTIONS]
 
@@ -288,7 +288,7 @@ EXAMPLES
   '---------------------------------------------------------------------------'
 ```
 
-_See code: [src/commands/index-usage.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/index-usage.ts)_
+_See code: [src/commands/index-usage.ts](https://github.com/kklisura/pg-extras/blob/v0.0.4/src/commands/index-usage.ts)_
 
 ## pg-extras locks [OPTIONS]
 
@@ -315,7 +315,7 @@ EXAMPLE
   locks [OPTIONS]
 ```
 
-_See code: [src/commands/locks.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/locks.ts)_
+_See code: [src/commands/locks.ts](https://github.com/kklisura/pg-extras/blob/v0.0.4/src/commands/locks.ts)_
 
 ## pg-extras long-running-queries [OPTIONS]
 
@@ -335,7 +335,7 @@ EXAMPLE
   long-running-queries [OPTIONS]
 ```
 
-_See code: [src/commands/long-running-queries.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/long-running-queries.ts)_
+_See code: [src/commands/long-running-queries.ts](https://github.com/kklisura/pg-extras/blob/v0.0.4/src/commands/long-running-queries.ts)_
 
 ## pg-extras outliers [SCHEMA] [OPTIONS]
 
@@ -368,7 +368,7 @@ EXAMPLES
   '-----------------------------------------------------------------------'
 ```
 
-_See code: [src/commands/outliers.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/outliers.ts)_
+_See code: [src/commands/outliers.ts](https://github.com/kklisura/pg-extras/blob/v0.0.4/src/commands/outliers.ts)_
 
 ## pg-extras records-rank [OPTIONS]
 
@@ -395,7 +395,7 @@ EXAMPLES
   '------------------------------------------------'
 ```
 
-_See code: [src/commands/records-rank.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/records-rank.ts)_
+_See code: [src/commands/records-rank.ts](https://github.com/kklisura/pg-extras/blob/v0.0.4/src/commands/records-rank.ts)_
 
 ## pg-extras seq-scans [OPTIONS]
 
@@ -422,7 +422,7 @@ EXAMPLES
   '--------------------------------------'
 ```
 
-_See code: [src/commands/seq-scans.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/seq-scans.ts)_
+_See code: [src/commands/seq-scans.ts](https://github.com/kklisura/pg-extras/blob/v0.0.4/src/commands/seq-scans.ts)_
 
 ## pg-extras stats-reset [OPTIONS]
 
@@ -442,7 +442,7 @@ EXAMPLE
   stats-reset [OPTIONS]
 ```
 
-_See code: [src/commands/stats-reset.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/stats-reset.ts)_
+_See code: [src/commands/stats-reset.ts](https://github.com/kklisura/pg-extras/blob/v0.0.4/src/commands/stats-reset.ts)_
 
 ## pg-extras table-indexes-size [OPTIONS]
 
@@ -469,7 +469,7 @@ EXAMPLES
   '------------------------------'------------'
 ```
 
-_See code: [src/commands/table-indexes-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/table-indexes-size.ts)_
+_See code: [src/commands/table-indexes-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.4/src/commands/table-indexes-size.ts)_
 
 ## pg-extras table-size [OPTIONS]
 
@@ -496,7 +496,7 @@ EXAMPLES
   '------------------------------'------------'
 ```
 
-_See code: [src/commands/table-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/table-size.ts)_
+_See code: [src/commands/table-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.4/src/commands/table-size.ts)_
 
 ## pg-extras total-index-size [OPTIONS]
 
@@ -522,7 +522,7 @@ EXAMPLES
   '--------'
 ```
 
-_See code: [src/commands/total-index-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/total-index-size.ts)_
+_See code: [src/commands/total-index-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.4/src/commands/total-index-size.ts)_
 
 ## pg-extras total-table-size [OPTIONS]
 
@@ -549,7 +549,7 @@ EXAMPLES
   '-------------------------------------------'
 ```
 
-_See code: [src/commands/total-table-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/total-table-size.ts)_
+_See code: [src/commands/total-table-size.ts](https://github.com/kklisura/pg-extras/blob/v0.0.4/src/commands/total-table-size.ts)_
 
 ## pg-extras unused-indexes [OPTIONS]
 
@@ -577,7 +577,7 @@ EXAMPLES
   '------------------------------------------------------------------------------------------------------------------'
 ```
 
-_See code: [src/commands/unused-indexes.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/unused-indexes.ts)_
+_See code: [src/commands/unused-indexes.ts](https://github.com/kklisura/pg-extras/blob/v0.0.4/src/commands/unused-indexes.ts)_
 
 ## pg-extras user-connections [OPTIONS]
 
@@ -603,7 +603,7 @@ EXAMPLES
   '----------------------------'
 ```
 
-_See code: [src/commands/user-connections.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/user-connections.ts)_
+_See code: [src/commands/user-connections.ts](https://github.com/kklisura/pg-extras/blob/v0.0.4/src/commands/user-connections.ts)_
 
 ## pg-extras vaccum-stats [OPTIONS]
 
@@ -623,5 +623,5 @@ EXAMPLE
   vaccum-stats [OPTIONS]
 ```
 
-_See code: [src/commands/vaccum-stats.ts](https://github.com/kklisura/pg-extras/blob/v0.0.3/src/commands/vaccum-stats.ts)_
+_See code: [src/commands/vaccum-stats.ts](https://github.com/kklisura/pg-extras/blob/v0.0.4/src/commands/vaccum-stats.ts)_
 <!-- commandsstop -->
